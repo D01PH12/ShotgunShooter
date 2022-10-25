@@ -17,7 +17,6 @@ public class EnemyAI : MonoBehaviour
     public Collider blueBullet;
     public float startHealth;
     float health;
-    public float blueBulletDamage;
     public int points;
     public Text txt;
     
@@ -45,14 +44,13 @@ public class EnemyAI : MonoBehaviour
         lastShot += Time.deltaTime * 1000;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.tag == blueBullet.tag) {
-            health = health - blueBulletDamage;
-            if (health <= 0) {
-                this.gameObject.transform.Translate(0, -200, 0);
-                txt.text = "Score: " + ((int.Parse(txt.text.Split()[1]) + points).ToString());
-
-            }
+    public void reduceHealth(float damage)
+    {
+        health = health - damage;
+        if (health <= 0.01)
+        {
+            this.gameObject.transform.Translate(0, -200, 0);
+            txt.text = "Score: " + ((int.Parse(txt.text.Split()[1]) + points).ToString());
         }
     }
 }

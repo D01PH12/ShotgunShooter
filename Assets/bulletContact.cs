@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class bulletContact : MonoBehaviour
 {
-    public GameObject impactLight;
+    public float damage;
     private GameObject child;
     // Start is called before the first frame update
     void Start()
@@ -19,10 +19,15 @@ public class bulletContact : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        //Particle effect
-        // Need to find out how to make this work with terrain
+        if (collision.gameObject.CompareTag("Enemy")) {
+            collision.gameObject.GetComponent<EnemyAI>().reduceHealth(damage);
+        } else
+        {
+            Debug.Log(collision.gameObject.name);
+            // Play particle effect of hitting the ground
+        }
+        Destroy(gameObject);
     }
-
 }
