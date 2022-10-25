@@ -18,7 +18,7 @@ public class PostScores : MonoBehaviour
 
     void Update() {
         if(Input.GetKeyDown(KeyCode.Space)) {
-            SceneManager.LoadScene("StartScene");
+            SceneManager.LoadScene("StartScreen");
         }
     }
 
