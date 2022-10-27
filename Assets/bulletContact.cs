@@ -23,11 +23,11 @@ public class bulletContact : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy")) {
             collision.gameObject.GetComponent<EnemyAI>().reduceHealth(damage);
-        } else
+            Destroy(gameObject);
+        } else if (!collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log(collision.gameObject.name);
             // Play particle effect of hitting the ground
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }
