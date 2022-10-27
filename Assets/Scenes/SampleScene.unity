@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -155,14 +155,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095936427317426408e2376c131039ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1766857710}
+  player: {fileID: 1593460569}
   projectile: {fileID: 805338405}
-  velocity: 1000
+  velocity: 1250
   shootRange: 50
   delay: 3
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0.05
   points: 45
   txt: {fileID: 1300131306}
 --- !u!136 &12449709
@@ -3605,6 +3606,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5ae9215659c61fc47b275176440ad823, type: 3}
   m_PrefabInstance: {fileID: 1012767711}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &805338415
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805338405}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.33, y: 0.004, z: 0.461514}
+  m_Center: {x: 0, y: 0.0016101846, z: -0.08112203}
+--- !u!114 &805338416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805338405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6663b096873c9e449b06a63652afe71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &807832217
 GameObject:
   m_ObjectHideFlags: 0
@@ -4724,6 +4750,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: red-bolt
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ae9215659c61fc47b275176440ad823, type: 3}
+      propertyPath: m_TagString
+      value: Bullet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5ae9215659c61fc47b275176440ad823, type: 3}
@@ -5083,14 +5113,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095936427317426408e2376c131039ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1766857710}
+  player: {fileID: 1593460569}
   projectile: {fileID: 805338405}
-  velocity: 1000
+  velocity: 1250
   shootRange: 50
   delay: 3
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0.05
   points: 150
   txt: {fileID: 1300131306}
 --- !u!136 &1081791770
@@ -5617,6 +5648,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rp_nathan_animated_003_walking
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d63448940372f9642a77506eeccb8f2a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4548457775781519903, guid: d63448940372f9642a77506eeccb8f2a, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
@@ -5701,40 +5736,6 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 1235985370}
   m_SourcePrefab: {fileID: 100100000, guid: d63448940372f9642a77506eeccb8f2a, type: 3}
---- !u!1 &1152892766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4908875798020136424, guid: d63448940372f9642a77506eeccb8f2a, type: 3}
-  m_PrefabInstance: {fileID: 1152892765}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1152892767 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3749895514746155587, guid: d63448940372f9642a77506eeccb8f2a, type: 3}
-  m_PrefabInstance: {fileID: 1152892765}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1152892768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152892766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b5cd67813067824e9fcae8d1928f4ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1152892769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152892767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b5cd67813067824e9fcae8d1928f4ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &1191204693
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5914,14 +5915,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095936427317426408e2376c131039ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1766857710}
+  player: {fileID: 1593460569}
   projectile: {fileID: 805338405}
-  velocity: 1000
+  velocity: 1250
   shootRange: 50
   delay: 3
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0.05
   points: 50
   txt: {fileID: 1300131306}
 --- !u!136 &1240035420
@@ -7668,6 +7670,34 @@ MonoBehaviour:
   endPoint: {fileID: 433468591}
   endDist: 3
   data: {fileID: 1395408916}
+--- !u!114 &1593460573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593460569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b658a49dd2f6cf4c8824392172f4ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  bulletDamage: 10
+--- !u!136 &1593460574
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593460569}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.69
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.07, z: 0}
 --- !u!1 &1593500393 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7228849165554181583, guid: 28ec92e0b229ad84a905d640c02253d8, type: 3}
@@ -8533,14 +8563,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095936427317426408e2376c131039ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1766857710}
+  player: {fileID: 1593460569}
   projectile: {fileID: 805338405}
-  velocity: 1000
+  velocity: 1250
   shootRange: 50
   delay: 3
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 30
+  spreadAngle: 0.05
   points: 75
   txt: {fileID: 1300131306}
 --- !u!136 &1813052733
@@ -9201,7 +9232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 638426873}
-  velocity: 400
+  velocity: 600
   cam: {fileID: 963194225}
   spawnPoint: {fileID: 807832217}
   shots: {fileID: 653821922}
@@ -9456,7 +9487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054859059}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.03711384, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0012, z: 0}
   m_LocalScale: {x: 0.43056333, y: 0.029496124, z: 0.43056333}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9909,14 +9940,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095936427317426408e2376c131039ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1766857710}
+  player: {fileID: 1593460569}
   projectile: {fileID: 805338405}
-  velocity: 1000
+  velocity: 1250
   shootRange: 50
   delay: 3
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 20
+  spreadAngle: 0.05
   points: 60
   txt: {fileID: 1300131306}
 --- !u!136 &2099696293
@@ -10448,14 +10480,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095936427317426408e2376c131039ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1766857710}
+  player: {fileID: 1593460569}
   projectile: {fileID: 805338405}
-  velocity: 1000
+  velocity: 1250
   shootRange: 50
   delay: 3
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0.05
   points: 45
   txt: {fileID: 1300131306}
 --- !u!136 &2144636215
