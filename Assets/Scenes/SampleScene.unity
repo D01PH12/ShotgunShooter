@@ -163,6 +163,7 @@ MonoBehaviour:
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0
   points: 45
   txt: {fileID: 1300131306}
 --- !u!136 &12449709
@@ -1353,6 +1354,7 @@ MonoBehaviour:
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0
   points: 50
   txt: {fileID: 1300131306}
 --- !u!136 &201965334
@@ -3433,22 +3435,101 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
---- !u!123 &638426887
-LensFlare:
+--- !u!114 &638426890
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638426873}
-  m_Enabled: 0
-  m_Flare: {fileID: 12100000, guid: 2e65013b7bce2a44db37c67595b14c51, type: 2}
-  m_Color: {r: 0, g: 0.86540127, b: 1, a: 0}
-  m_Brightness: 1
-  m_FadeSpeed: 3
-  m_IgnoreLayers:
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LensFlareData: {fileID: 11400000, guid: ff5464071d5050848b3cfb0160a8aea4, type: 2}
+  intensity: 1
+  maxAttenuationDistance: 100
+  maxAttenuationScale: 100
+  distanceAttenuationCurve:
     serializedVersion: 2
-    m_Bits: 6
-  m_Directional: 0
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  scaleByDistanceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  attenuationByLightShape: 1
+  radialScreenAttenuationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  useOcclusion: 0
+  occlusionRadius: 0.1
+  sampleCount: 32
+  occlusionOffset: 0.05
+  scale: 1
+  allowOffScreen: 0
 --- !u!1 &653821920
 GameObject:
   m_ObjectHideFlags: 0
@@ -4452,6 +4533,7 @@ MonoBehaviour:
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0
   points: 50
   txt: {fileID: 1300131306}
 --- !u!136 &833787699
@@ -6067,6 +6149,7 @@ MonoBehaviour:
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0
   points: 150
   txt: {fileID: 1300131306}
 --- !u!136 &1081791770
@@ -7121,6 +7204,7 @@ MonoBehaviour:
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0
   points: 50
   txt: {fileID: 1300131306}
 --- !u!136 &1240035420
@@ -10770,6 +10854,7 @@ MonoBehaviour:
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 30
+  spreadAngle: 0
   points: 75
   txt: {fileID: 1300131306}
 --- !u!136 &1813052733
@@ -11032,6 +11117,7 @@ MonoBehaviour:
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0
   points: 50
   txt: {fileID: 1300131306}
 --- !u!136 &1868430485
@@ -11863,6 +11949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2054859060}
   - component: {fileID: 2054859061}
+  - component: {fileID: 2054859062}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -11930,7 +12017,7 @@ Light:
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 12100000, guid: 2e65013b7bce2a44db37c67595b14c51, type: 2}
+  m_Flare: {fileID: 12100000, guid: fd51c72dd5871dc4398c7122d20baea4, type: 2}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
@@ -11947,6 +12034,101 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &2054859062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054859059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LensFlareData: {fileID: 11400000, guid: ff5464071d5050848b3cfb0160a8aea4, type: 2}
+  intensity: 10.1
+  maxAttenuationDistance: 100
+  maxAttenuationScale: 100
+  distanceAttenuationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  scaleByDistanceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  attenuationByLightShape: 1
+  radialScreenAttenuationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  useOcclusion: 0
+  occlusionRadius: 0.1
+  sampleCount: 32
+  occlusionOffset: 0.05
+  scale: 1
+  allowOffScreen: 0
 --- !u!1 &2060912667 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5905734959366818351, guid: 28ec92e0b229ad84a905d640c02253d8, type: 3}
@@ -12496,6 +12678,7 @@ MonoBehaviour:
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 20
+  spreadAngle: 0
   points: 60
   txt: {fileID: 1300131306}
 --- !u!136 &2099696293
@@ -13035,6 +13218,7 @@ MonoBehaviour:
   rof: 100
   blueBullet: {fileID: 638426878}
   startHealth: 10
+  spreadAngle: 0
   points: 45
   txt: {fileID: 1300131306}
 --- !u!136 &2144636215
