@@ -6927,6 +6927,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5cd67813067824e9fcae8d1928f4ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertMouse: 0
+  mouseSensitivity: 0
+  cam: {fileID: 963194227}
 --- !u!114 &1152892769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6939,6 +6942,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5cd67813067824e9fcae8d1928f4ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertMouse: 0
+  mouseSensitivity: 0
+  cam: {fileID: 963194227}
 --- !u!208 &1159216503
 NavMeshObstacle:
   m_ObjectHideFlags: 0
