@@ -7,9 +7,11 @@ public class Shoot : MonoBehaviour
 {
     public GameObject projectile;
     public float velocity;
+    public float fireRate;
     public GameObject cam;
     public GameObject spawnPoint;
     public Text shots;
+    private float lastShootTime;
 
     // Start is called before the first frame update
     void Start()
@@ -23,13 +25,12 @@ public class Shoot : MonoBehaviour
     void Update()
     {
 
-        if(Input.GetKeyDown(KeyCode.Mouse0)) {
-            
+        if(Input.GetKey(KeyCode.Mouse0) && Time.time > lastShootTime + fireRate) {
+            lastShootTime = Time.time;
             GameObject bullet = Instantiate(projectile, spawnPoint.transform.position, cam.transform.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(cam.transform.forward * velocity);
             shots.text = "SHOTS: " + ((int.Parse(shots.text.Split()[1]) + 1).ToString());
             Destroy(bullet, delay);
-  
         }
         
     }
