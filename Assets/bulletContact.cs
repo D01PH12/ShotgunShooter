@@ -22,6 +22,8 @@ public class bulletContact : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy")) {
+            // ERROR
+            // returns and damages all EnemyAI
             collision.gameObject.GetComponent<EnemyAI>().reduceHealth(damage);
             Destroy(gameObject);
         } else if (!collision.gameObject.CompareTag("Player"))
