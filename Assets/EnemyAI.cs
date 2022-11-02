@@ -13,11 +13,11 @@ public class EnemyAI : MonoBehaviour
     public float shootRange;
     public float delay;
     public float rof;
-    float lastShot;
+    private float lastShot;
     public Collider blueBullet;
     public float startHealth;
     public float spreadAngle;
-    float health;
+    private float health;
     public int points;
     public Text txt;
     
