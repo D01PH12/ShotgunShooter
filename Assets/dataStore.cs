@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class dataStore : MonoBehaviour
 {
     public Text score;
-    public Text shots;
     public int scoreStore;
-    public int shotsStore;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +17,5 @@ public class dataStore : MonoBehaviour
     void Update()
     {
         scoreStore = int.Parse(score.text.Split()[1]);
-        shotsStore = int.Parse(shots.text.Split()[1]);
     }
 }

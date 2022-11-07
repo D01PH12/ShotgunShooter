@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class takeDamage : MonoBehaviour
 {
-    public int maxHealth;
     public int bulletDamage;
-    private int health;
+    public GameObject healthDisplay;
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -24,12 +22,7 @@ public class takeDamage : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             Destroy(collision.gameObject);
-            health = health - bulletDamage;
-            Debug.Log("Health: " + health);
-            if (health <= 0)
-            {
-                // Dead
-            }
+            healthDisplay.GetComponent<HealthDisplay>().takeDamage(bulletDamage);
         }
     }
 }
