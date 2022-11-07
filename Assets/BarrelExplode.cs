@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class BarrelExplode : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject explode;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnTriggerEnter(Collider other) {
+
+        if (other.gameObject.CompareTag("Bullet")) {
+            
+            Instantiate(explode, gameObject.transform);
+            Destroy(gameObject);
+        }    
     }
 }
