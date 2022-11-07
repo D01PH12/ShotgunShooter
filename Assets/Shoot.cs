@@ -2,21 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Shoot : MonoBehaviour
 {
     public GameObject projectile;
     public float velocity;
     public float fireRate;
+    public int maxAmmo;
     public GameObject cam;
     public GameObject spawnPoint;
-    public Text shots;
+    public GameObject ammoDisplay;
+    public float reloadTime;
     private float lastShootTime;
+    private float reloadFinishTime;
+    private int ammo;
+    private bool reloading = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        shots.text = "Score: " + "0";
+        ammo = maxAmmo;
+        ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + ammo;
     }
 
     public float delay; //This implies a delay of 2 seconds.
@@ -24,14 +31,31 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if(Input.GetKey(KeyCode.Mouse0) && Time.time > lastShootTime + fireRate) {
+        // waiting for reload to finish
+        if (reloading)
+        {
+            // reloading finished
+            if (reloadFinishTime <= Time.time)
+            {
+                ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + ammo;
+                ammo = maxAmmo;
+                reloading = false;
+            }
+        }
+        // reload
+        else if (ammo == 0 || Input.GetKeyDown(KeyCode.R))
+        {
+            reloading = true;
+            reloadFinishTime = Time.time + reloadTime;
+            // TODO: Play reload animation
+        }
+        // shoot
+        else if(Input.GetKey(KeyCode.Mouse0) && Time.time > lastShootTime + fireRate) {
             lastShootTime = Time.time;
             GameObject bullet = Instantiate(projectile, spawnPoint.transform.position, cam.transform.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(cam.transform.forward * velocity);
-            shots.text = "SHOTS: " + ((int.Parse(shots.text.Split()[1]) + 1).ToString());
+            ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + --ammo;
             Destroy(bullet, delay);
         }
-        
     }
 }

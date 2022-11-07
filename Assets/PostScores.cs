@@ -13,7 +13,6 @@ public class PostScores : MonoBehaviour
     {
         GameObject data = GameObject.Find("data");
         score.text = "SCORE: " + data.GetComponent<dataStore>().scoreStore.ToString();
-        shots.text = "SHOTS: " + data.GetComponent<dataStore>().shotsStore.ToString();
     }
 
     void Update() {
