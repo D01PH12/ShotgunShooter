@@ -10,7 +10,8 @@ public class BarrelExplode : MonoBehaviour
 
         if (other.gameObject.CompareTag("Bullet")) {
             
-            Instantiate(explode, gameObject.transform);
+            
+            Instantiate(explode, gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }    
     }
