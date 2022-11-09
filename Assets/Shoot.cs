@@ -37,8 +37,8 @@ public class Shoot : MonoBehaviour
             // reloading finished
             if (reloadFinishTime <= Time.time)
             {
-                ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + ammo;
                 ammo = maxAmmo;
+                ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + ammo;
                 reloading = false;
             }
         }

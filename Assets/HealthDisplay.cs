@@ -5,17 +5,16 @@ using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour
 {
-    public int maxHealth;
-    private int health;
+    private int maxHealth;
+    public int health;
     private int healthBarValue;
     private Image healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
-        healthBarValue = maxHealth;
         healthBar = GetComponent<Image>();
+        healthBarValue = maxHealth;
     }
 
     // Update is called once per frame
@@ -28,15 +27,10 @@ public class HealthDisplay : MonoBehaviour
         }
         healthBar.fillAmount = healthBarValue / (float) maxHealth;
     }
-
-    public void takeDamage(int damage)
+    public void setMaxHealth(int hp)
     {
-        // TODO: Also indicate this better
-        health = health - damage;
-        Debug.Log(health);
-        if (health <= 0)
-        {
-            // TODO: Dead
-        }
+        maxHealth = hp;
+        health = hp;
+        healthBarValue = hp;
     }
 }

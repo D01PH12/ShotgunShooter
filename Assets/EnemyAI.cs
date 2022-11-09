@@ -21,6 +21,9 @@ public class EnemyAI : MonoBehaviour
     private float health;
     public int points;
     public Text txt;
+    public GameObject damagePopupPrefab;
+    private HealthDisplay healthBar;
+    private TextMeshProUGUI healthText;
     
 
     // Start is called before the first frame update
@@ -28,6 +31,10 @@ public class EnemyAI : MonoBehaviour
     {
         health = startHealth;
         txt.text = "Score: " + "0";
+        healthBar = transform.GetChild(1).GetChild(0).GetChild(0).gameObject.GetComponent<HealthDisplay>();
+        healthBar.setMaxHealth((int) startHealth);
+        healthText = transform.GetChild(1).GetChild(0).GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
+        healthText.text = ((int)health).ToString();
     }
 
     // Update is called once per frame
@@ -54,6 +61,13 @@ public class EnemyAI : MonoBehaviour
     public void reduceHealth(float damage)
     {
         health = health - damage;
+
+        // Change UI stuff
+        healthBar.health = (int) health;
+        healthText.text = ((int)health).ToString();
+        GameObject GO = Instantiate(damagePopupPrefab, healthText.transform.position, Quaternion.identity);
+        GO.GetComponent<damagePopup>().SetUp((int)damage);
+
         if (health <= 0.01)
         {
             this.gameObject.transform.Translate(0, -200, 0);
