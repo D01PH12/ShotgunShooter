@@ -14,10 +14,14 @@ public class Shoot : MonoBehaviour
     public GameObject spawnPoint;
     public GameObject ammoDisplay;
     public float reloadTime;
+    public float switchTime;
+    public GameObject nextGun;
     private float lastShootTime;
     private float reloadFinishTime;
+    private float switchFinishTime;
     private int ammo;
     private bool reloading = false;
+    private bool switching = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +30,6 @@ public class Shoot : MonoBehaviour
         ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + ammo;
     }
 
-    public float delay; //This implies a delay of 2 seconds.
 
     // Update is called once per frame
     void Update()
@@ -40,6 +43,12 @@ public class Shoot : MonoBehaviour
                 ammo = maxAmmo;
                 ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + ammo;
                 reloading = false;
+            }
+        } else if (switching) {
+            // switching finished
+            if (switchFinishTime <= Time.time)
+            {
+                switching = false;
             }
         }
         // reload
@@ -55,7 +64,21 @@ public class Shoot : MonoBehaviour
             GameObject bullet = Instantiate(projectile, spawnPoint.transform.position, cam.transform.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(cam.transform.forward * velocity);
             ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + --ammo;
-            Destroy(bullet, delay);
+            Destroy(bullet, 2f);
         }
+        // switch gun
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            reloading = false;
+            nextGun.SetActive(true);
+            gameObject.SetActive(false);
+        }
+    }
+    void OnEnable()
+    {
+        switching = true;
+        switchFinishTime = Time.time + switchTime;
+        // TODO: Play switch animation
+        ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + ammo;
     }
 }
