@@ -7,7 +7,7 @@ public class WaypointMover : MonoBehaviour
     // reference to the waypoint system
     [SerializeField] private Waypoints waypoints;
 
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 1f;
 
     [SerializeField] private float distanceThreshold = 0.1f;
 
