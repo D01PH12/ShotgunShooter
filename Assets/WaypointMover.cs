@@ -17,10 +17,13 @@ public class WaypointMover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // set initial position to the first waypoint
         currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
         transform.position = currentWaypoint.position;
 
+        // waypoint to next target
         currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
+        transform.LookAt(currentWaypoint);
     }
 
     // Update is called once per frame
@@ -30,6 +33,7 @@ public class WaypointMover : MonoBehaviour
         if(Vector3.Distance(transform.position, currentWaypoint.position) < distanceThreshold)
         {
             currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
+            transform.LookAt(currentWaypoint);
         }
         
     }
