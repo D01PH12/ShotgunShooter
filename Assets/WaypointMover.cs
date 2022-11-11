@@ -14,6 +14,12 @@ public class WaypointMover : MonoBehaviour
     // current waypoint target that the object is moving towards
     private Transform currentWaypoint;
 
+    // trigger event handlers
+    public GameObject triggerBoss;
+    public float triggerRange;
+    public GameObject player;
+    bool move = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,18 +29,29 @@ public class WaypointMover : MonoBehaviour
 
         // waypoint to next target
         currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
-        transform.LookAt(currentWaypoint);
+        //transform.LookAt(currentWaypoint);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.position, moveSpeed * Time.deltaTime);
-        if(Vector3.Distance(transform.position, currentWaypoint.position) < distanceThreshold)
+        Debug.Log("checking range with a triggerRange of: " + triggerRange);
+        Debug.Log(Vector3.Distance(player.transform.position, triggerBoss.transform.position));
+        if (Vector3.Distance(player.transform.position, triggerBoss.transform.position) < triggerRange)
         {
-            currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
-            transform.LookAt(currentWaypoint);
+            move = true;
+            Debug.Log("in range");
         }
-        
+        if(move == true)
+        {
+            Debug.Log("currently moving");
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.position, moveSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, currentWaypoint.position) < distanceThreshold)
+            {
+                currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
+                //transform.LookAt(currentWaypoint);
+            }
+        }
+
     }
 }
