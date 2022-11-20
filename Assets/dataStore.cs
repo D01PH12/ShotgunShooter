@@ -10,12 +10,12 @@ public class dataStore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        score.text = "Score: " + "0";
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreStore = int.Parse(score.text.Split()[1]);
+        score.text = "Score: " + ((scoreStore).ToString());
     }
 }

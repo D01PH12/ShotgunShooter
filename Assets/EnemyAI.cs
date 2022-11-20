@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     public float spreadAngle;
     private float health;
     public int points;
-    public Text txt;
+    public dataStore score;
     public GameObject damagePopupPrefab;
     private HealthDisplay healthBar;
     private TextMeshProUGUI healthText;
@@ -30,7 +30,6 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         health = startHealth;
-        txt.text = "Score: " + "0";
         healthBar = transform.GetChild(1).GetChild(0).GetChild(0).gameObject.GetComponent<HealthDisplay>();
         healthBar.setMaxHealth((int) startHealth);
         healthText = transform.GetChild(1).GetChild(0).GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
@@ -71,7 +70,7 @@ public class EnemyAI : MonoBehaviour
         if (health <= 0.01)
         {
             this.gameObject.transform.Translate(0, -200, 0);
-            txt.text = "Score: " + ((int.Parse(txt.text.Split()[1]) + points).ToString());
+            score.scoreStore = score.scoreStore + points;
         }
     }
 }

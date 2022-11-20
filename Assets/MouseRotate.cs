@@ -30,14 +30,14 @@ public class MouseRotate : MonoBehaviour
             cam.transform.RotateAround(camTarget.transform.position, cam.transform.right, -Y);
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape)) {
-            Cursor.lockState = CursorLockMode.None;
-        }
-
         if(Vector3.Distance(endPoint.transform.position, this.gameObject.transform.position) < endDist) {
             DontDestroyOnLoad(data);
             SceneManager.LoadScene("EndScene");
         }
 
+    }
+    private void OnEnable()
+    {
+        mouseSensitivity = PlayerPrefs.GetFloat("sens") * 9;
     }
 }
