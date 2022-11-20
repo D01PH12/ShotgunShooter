@@ -5,17 +5,19 @@ using UnityEngine.UI;
 
 public class dataStore : MonoBehaviour
 {
-    public Text score;
-    public int scoreStore;
-    // Start is called before the first frame update
-    void Start()
+    public static dataStore Instance;
+    public static int score;
+
+    private void Awake()
     {
-        score.text = "Score: " + "0";
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        score.text = "Score: " + ((scoreStore).ToString());
-    }
 }

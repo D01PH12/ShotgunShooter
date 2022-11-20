@@ -31,4 +31,11 @@ public class bulletContact : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Barrel"))
+        {
+            other.gameObject.GetComponent<BarrelExplode>().Explode();
+        }
+    }
 }

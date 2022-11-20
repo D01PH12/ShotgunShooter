@@ -20,7 +20,6 @@ public class EnemyAI : MonoBehaviour
     public float spreadAngle;
     private float health;
     public int points;
-    public dataStore score;
     public GameObject damagePopupPrefab;
     private HealthDisplay healthBar;
     private TextMeshProUGUI healthText;
@@ -70,7 +69,7 @@ public class EnemyAI : MonoBehaviour
         if (health <= 0.01)
         {
             this.gameObject.transform.Translate(0, -200, 0);
-            score.scoreStore = score.scoreStore + points;
+            dataStore.score += points;
         }
     }
 }

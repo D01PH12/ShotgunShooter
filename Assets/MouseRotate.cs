@@ -9,9 +9,6 @@ public class MouseRotate : MonoBehaviour
     public float mouseSensitivity;
     public GameObject cam;
     public GameObject camTarget;
-    public GameObject endPoint;
-    public float endDist;
-    public GameObject data;
 
     // Start is called before the first frame update
     void Start()
@@ -28,11 +25,6 @@ public class MouseRotate : MonoBehaviour
 
         if(!(cam.transform.eulerAngles.x + (-Y) > 80 && cam.transform.eulerAngles.x + (-Y) < 280)) {
             cam.transform.RotateAround(camTarget.transform.position, cam.transform.right, -Y);
-        }
-
-        if(Vector3.Distance(endPoint.transform.position, this.gameObject.transform.position) < endDist) {
-            DontDestroyOnLoad(data);
-            SceneManager.LoadScene("EndScene");
         }
 
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StandOnTruck : MonoBehaviour
 {
@@ -15,5 +16,13 @@ public class StandOnTruck : MonoBehaviour
     void Update()
     {
         transform.position = standPosition.position;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }
