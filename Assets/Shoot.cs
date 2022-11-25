@@ -24,12 +24,14 @@ public class Shoot : MonoBehaviour
     private int ammo;
     private bool reloading = false;
     private bool switching = false;
+    private AudioSource shootSound;
 
     // Start is called before the first frame update
     void Start()
     {
         ammo = maxAmmo;
         ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + ammo;
+        shootSound = gameObject.GetComponent<AudioSource>();
     }
 
 
@@ -80,6 +82,7 @@ public class Shoot : MonoBehaviour
         else if(Input.GetKey(KeyCode.Mouse0) && Time.time > lastShootTime + fireRate) {
             lastShootTime = Time.time;
             GameObject bullet = Instantiate(projectile, spawnPoint.transform.position, cam.transform.rotation);
+            shootSound.Play(0);
             bullet.GetComponent<Rigidbody>().AddForce(cam.transform.forward * velocity);
             ammoDisplay.GetComponent<TextMeshProUGUI>().text = "Ammo: " + --ammo;
             Destroy(bullet, 2f);
