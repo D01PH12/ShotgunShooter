@@ -42,6 +42,7 @@ public class PostScores : MonoBehaviour
                 break;
             }
         }
+        dataStore.score = 0;
         scores.text = "Score";
         names.text = "Name";
         for (int i = 0; i < leaderboard.Length; ++i)
