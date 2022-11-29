@@ -18,7 +18,7 @@ public class takeDamage : MonoBehaviour
         healthDisplay.GetComponent<HealthDisplay>().setMaxHealth(maxHealth);
     }
 
-    public IEnumerator Fade(bool fadeOut, bool changeScene, int fadeSpeed = 5)
+    public IEnumerator Fade(bool fadeOut, bool changeScene, int fadeSpeed = 400)
     {
         Color32 objectColor = fadeMask.color;
         float fadeAmount;
@@ -27,9 +27,11 @@ public class takeDamage : MonoBehaviour
         {
             while (fadeMask.color.a < 1)
             {
-                fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
+                fadeAmount = (objectColor.a + (fadeSpeed * Time.deltaTime));
+                if (fadeAmount > 255)
+                    fadeAmount = 255;
 
-                objectColor = new Color32(objectColor.r, objectColor.g, objectColor.b, (byte)(fadeAmount * 255));
+                objectColor = new Color32(objectColor.r, objectColor.g, objectColor.b, (byte)fadeAmount);
                 fadeMask.color = objectColor;
                 yield return null;
             }
@@ -37,9 +39,11 @@ public class takeDamage : MonoBehaviour
         {
             while (fadeMask.color.a > 0)
             {
-                fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
+                fadeAmount = (objectColor.a - (fadeSpeed * Time.deltaTime));
+                if (fadeAmount < 0)
+                    fadeAmount = 0;
 
-                objectColor = new Color32(objectColor.r, objectColor.g, objectColor.b, (byte)(fadeAmount * 255));
+                objectColor = new Color32(objectColor.r, objectColor.g, objectColor.b, (byte)fadeAmount);
                 fadeMask.color = objectColor;
                 yield return null;
             }
@@ -66,15 +70,14 @@ public class takeDamage : MonoBehaviour
                     // Fade to black
                     StopAllCoroutines();
                     fadeMask.color = new Color32(0, 0, 0, 0);
-                    StartCoroutine(Fade(true, true));
+                    StartCoroutine(Fade(true, true, 450));
                 }
                 else
                 {
                     // Flash screen
-                    // TODO: Why does this cause epilepsy?
-                //    StopAllCoroutines();
-                //    fadeMask.color = new Color32(255, 0, 0, 100);
-                //    StartCoroutine(Fade(false, false, 100));
+                    StopAllCoroutines();
+                    fadeMask.color = new Color32(255, 0, 0, 180);
+                    StartCoroutine(Fade(false, false, 550));
                 }
             }
         }
