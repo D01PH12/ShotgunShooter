@@ -22,7 +22,7 @@ public class StandOnTruck : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Finish"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("EndScene");
         }
     }
 }

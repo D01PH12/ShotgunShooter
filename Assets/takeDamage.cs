@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class takeDamage : MonoBehaviour
 {
     public int bulletDamage;
     public GameObject healthDisplay;
+    public Image fadeMask;
     public int maxHealth;
     private int health;
     // Start is called before the first frame update
@@ -15,10 +18,36 @@ public class takeDamage : MonoBehaviour
         healthDisplay.GetComponent<HealthDisplay>().setMaxHealth(maxHealth);
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator Fade(bool fadeOut, bool changeScene, int fadeSpeed = 5)
     {
-        
+        Color32 objectColor = fadeMask.color;
+        float fadeAmount;
+
+        if (fadeOut)
+        {
+            while (fadeMask.color.a < 1)
+            {
+                fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
+
+                objectColor = new Color32(objectColor.r, objectColor.g, objectColor.b, (byte)(fadeAmount * 255));
+                fadeMask.color = objectColor;
+                yield return null;
+            }
+        } else
+        {
+            while (fadeMask.color.a > 0)
+            {
+                fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
+
+                objectColor = new Color32(objectColor.r, objectColor.g, objectColor.b, (byte)(fadeAmount * 255));
+                fadeMask.color = objectColor;
+                yield return null;
+            }
+        }
+        if (changeScene)
+        {
+            SceneManager.LoadScene("DeathScene");
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -26,13 +55,27 @@ public class takeDamage : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             Destroy(collision.gameObject);
-
-            // TODO: Also indicate this better
-            health = health - bulletDamage;
-            healthDisplay.GetComponent<HealthDisplay>().health = health;
-            if (health <= 0)
+            // If the player is already dead, don't calculate damage
+            if (health > 0)
             {
-                // TODO: Dead
+                health = health - bulletDamage;
+                healthDisplay.GetComponent<HealthDisplay>().health = health;
+
+                if (health <= 0)
+                {
+                    // Fade to black
+                    StopAllCoroutines();
+                    fadeMask.color = new Color32(0, 0, 0, 0);
+                    StartCoroutine(Fade(true, true));
+                }
+                else
+                {
+                    // Flash screen
+                    // TODO: Why does this cause epilepsy?
+                //    StopAllCoroutines();
+                //    fadeMask.color = new Color32(255, 0, 0, 100);
+                //    StartCoroutine(Fade(false, false, 100));
+                }
             }
         }
     }
