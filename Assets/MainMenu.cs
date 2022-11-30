@@ -9,6 +9,21 @@ public class MainMenu : MonoBehaviour
     public Slider soundSlider;
     public Slider musicSlider;
     public Slider sensSlider;
+    public AudioSource music;
+
+    private void Update()
+    {
+        if (musicSlider != null && musicSlider.IsActive())
+        {
+            music.volume = musicSlider.value;
+            dataStore.volume = soundSlider.value;
+        }
+    }
+    private void Start()
+    {
+        music.volume = PlayerPrefs.GetFloat("music");
+        dataStore.volume = PlayerPrefs.GetFloat("sound");
+    }
 
     public void PlayGame()
     {
