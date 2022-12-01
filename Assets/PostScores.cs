@@ -10,39 +10,60 @@ public class PostScores : MonoBehaviour
 {
     public TextMeshProUGUI scores;
     public TextMeshProUGUI names;
+    public leaderboardObject[] leaderboard;
+    private int index;
     // Start is called before the first frame update
     void Start()
     {
-        SaveScoreToLeaderBoard();
+        if (names != null)
+        {
+            SaveScoreToLeaderBoard();
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.Space)) {
-            Cursor.lockState = CursorLockMode.None;
+        if(scores.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Space)) {
             SceneManager.LoadScene(0);
+            Cursor.lockState = CursorLockMode.None;
+            dataStore.score = 0;
         }
     }
 
     void SaveScoreToLeaderBoard() {
         string jsonInput = System.IO.File.ReadAllText("./leaderboard.json");
-        leaderboardObject[] leaderboard = JsonHelper.FromJson<leaderboardObject>(jsonInput);
-        for (int i = 0; i < leaderboard.Length; ++i)
+        leaderboard = JsonHelper.FromJson<leaderboardObject>(jsonInput);
+        for (index = 0; index < leaderboard.Length; ++index)
         {
-            if (dataStore.score > int.Parse(leaderboard[i].score))
+            if (dataStore.score > int.Parse(leaderboard[index].score))
             {
-                // TODO: Prompt name; if not entered, break execution
-                string name = "placeholder";
-                // Walk backward changing scores
-                for (int j = leaderboard.Length - 1; j > i; --j)
-                {
-                    leaderboard[j] = leaderboard[j - 1];
-                }
-                leaderboard[i] = new leaderboardObject(dataStore.score.ToString(), name);
-                Write(JsonHelper.ToJson(leaderboard));
-                break;
+                return;
             }
         }
-        dataStore.score = 0;
+        // If not on the leaderboard, just show it
+        ShowLeaderboard(null);
+    }
+
+    public void ShowLeaderboard(TextMeshProUGUI name)
+    {
+        // Disable input
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+
+        // If input, add to leaderboard
+        if (name != null || name.text == "")
+        {
+            // Walk backward changing scores
+            for (int j = leaderboard.Length - 1; j > index; --j)
+            {
+                leaderboard[j] = leaderboard[j - 1];
+            }
+            leaderboard[index] = new leaderboardObject(dataStore.score.ToString(), name.text);
+            Write(JsonHelper.ToJson(leaderboard));
+        }
+
+        // Show leaderboard
         scores.text = "Score";
         names.text = "Name";
         for (int i = 0; i < leaderboard.Length; ++i)
