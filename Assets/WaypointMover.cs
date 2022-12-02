@@ -29,7 +29,7 @@ public class WaypointMover : MonoBehaviour
 
         // waypoint to next target
         currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
-        //transform.LookAt(currentWaypoint);
+        transform.LookAt(player.transform);
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class WaypointMover : MonoBehaviour
             if (Vector3.Distance(transform.position, currentWaypoint.position) < distanceThreshold)
             {
                 currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
-                //transform.LookAt(currentWaypoint);
+                transform.LookAt(player.transform);
             }
         }
 
