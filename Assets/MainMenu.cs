@@ -39,6 +39,7 @@ public class MainMenu : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(0);
+        dataStore.score = 0;
     }
 
     public void SavePrefs()

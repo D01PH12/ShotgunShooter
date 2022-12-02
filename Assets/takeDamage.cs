@@ -68,9 +68,10 @@ public class takeDamage : MonoBehaviour
                 if (health <= 0)
                 {
                     // Fade to black
+                    GetComponent<Animator>().enabled = true;
                     StopAllCoroutines();
                     fadeMask.color = new Color32(0, 0, 0, 0);
-                    StartCoroutine(Fade(true, true, 450));
+                    StartCoroutine(Fade(true, true, 400));
                 }
                 else
                 {
