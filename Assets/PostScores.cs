@@ -17,8 +17,8 @@ public class PostScores : MonoBehaviour
     {
         if (names != null)
         {
-            SaveScoreToLeaderBoard();
             Cursor.lockState = CursorLockMode.None;
+            SaveScoreToLeaderBoard();
         }
     }
 
@@ -52,7 +52,7 @@ public class PostScores : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         // If input, add to leaderboard
-        if (name != null || name.text == "")
+        if (name != null && name.text == "")
         {
             // Walk backward changing scores
             for (int j = leaderboard.Length - 1; j > index; --j)
