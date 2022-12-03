@@ -38,8 +38,8 @@ public class MainMenu : MonoBehaviour
     public void ToMainMenu()
     {
         Cursor.lockState = CursorLockMode.None;
-        SceneManager.LoadScene(0);
         dataStore.score = 0;
+        SceneManager.LoadScene(0);
     }
 
     public void SavePrefs()

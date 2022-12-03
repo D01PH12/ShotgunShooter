@@ -15,18 +15,22 @@ public class PostScores : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // If on win screen. Not death screen
         if (names != null)
         {
             Cursor.lockState = CursorLockMode.None;
             SaveScoreToLeaderBoard();
+        } else
+        {
+            StartCoroutine(ReturnToMainMenuAfterDelay(10.0f));
         }
     }
 
     void Update() {
         if(scores.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Space)) {
-            SceneManager.LoadScene(0);
             Cursor.lockState = CursorLockMode.None;
             dataStore.score = 0;
+            SceneManager.LoadScene(0);
         }
     }
 
@@ -37,6 +41,8 @@ public class PostScores : MonoBehaviour
         {
             if (dataStore.score > int.Parse(leaderboard[index].score))
             {
+                // If no input is detected, skip to leaderboard
+                StartCoroutine(SkipHighscoreAfterDelay(30.0f));
                 return;
             }
         }
@@ -71,11 +77,27 @@ public class PostScores : MonoBehaviour
             scores.text += "\n" + leaderboard[i].score;
             names.text += "\n" + leaderboard[i].name;
         }
+        StartCoroutine(ReturnToMainMenuAfterDelay(45.0f));
     }
     async void Write(string text)
     {
 
         await File.WriteAllTextAsync("./leaderboard.json", text);
+    }
+    private IEnumerator ReturnToMainMenuAfterDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        Cursor.lockState = CursorLockMode.None;
+        dataStore.score = 0;
+        SceneManager.LoadScene(0);
+    }
+
+    private IEnumerator SkipHighscoreAfterDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        ShowLeaderboard(null);
     }
 }
 
