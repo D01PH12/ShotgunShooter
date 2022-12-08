@@ -27,7 +27,6 @@ public class bulletContact : MonoBehaviour
         } else if (!collision.gameObject.CompareTag("Player"))
         {
             // TODO: Play particle effect of hitting the ground
-            // TODO: Make noise
             Destroy(gameObject);
         }
     }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,7 +35,14 @@ public class PostScores : MonoBehaviour
     }
 
     void SaveScoreToLeaderBoard() {
-        string jsonInput = System.IO.File.ReadAllText("./leaderboard.json");
+        string jsonInput;
+        try
+        {
+            jsonInput = System.IO.File.ReadAllText("./leaderboard.json");
+        } catch (IOException)
+        {
+            jsonInput = "{\"Items\":[{\"score\":\"0\",\"name\":\"-----\"},{\"score\":\"0\",\"name\":\"-----\"},{\"score\":\"0\",\"name\":\"-----\"},{\"score\":\"0\",\"name\":\"-----\"},{\"score\":\"0\",\"name\":\"-----\"}]}";
+        }
         leaderboard = JsonHelper.FromJson<leaderboardObject>(jsonInput);
         for (index = 0; index < leaderboard.Length; ++index)
         {

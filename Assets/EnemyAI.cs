@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     public float startHealth;
     public float spreadAngle;
     private float health;
+    public GameObject shipExplosion;
     public int points;
     public GameObject damagePopupPrefab;
     private HealthDisplay healthBar;
@@ -65,11 +66,25 @@ public class EnemyAI : MonoBehaviour
         healthText.text = ((int)health).ToString();
         GameObject GO = Instantiate(damagePopupPrefab, healthText.transform.position, Quaternion.identity);
         GO.GetComponent<damagePopup>().SetUp((int)damage);
+        GetComponent<AudioSource>().Play();
 
         if (health <= 0.01)
         {
-            this.gameObject.transform.Translate(0, -200, 0);
+            transform.GetChild(1).gameObject.SetActive(false);
+            GetComponent<CapsuleCollider>().enabled = false;
             dataStore.score += points;
+            Animator enemyAnimator = transform.GetChild(0).gameObject.GetComponent<Animator>();
+            if (enemyAnimator != null)
+            {
+                enemyAnimator.enabled = true;
+                enemyAnimator.SetTrigger("Death");
+            } else
+            {
+                GameObject boom = Instantiate(shipExplosion, gameObject.transform.position, Quaternion.identity);
+                boom.transform.localScale = new Vector3(20, 20, 20);
+                Destroy(gameObject);
+            }
+            this.enabled = false;
         }
     }
 }

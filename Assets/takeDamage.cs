@@ -64,6 +64,7 @@ public class takeDamage : MonoBehaviour
             {
                 health = health - bulletDamage;
                 healthDisplay.GetComponent<HealthDisplay>().health = health;
+                GetComponent<AudioSource>().Play();
 
                 if (health <= 0)
                 {
